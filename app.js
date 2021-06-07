@@ -43,7 +43,7 @@ app.use(expressJwt({
   algorithms:['HS256'],
   credentialsRequired:true, //是否校验
 }).unless({
-  path:['/users/login','/livingRoom/roomList','/livingRoom/roomListByType']
+  path:['/users/login','/livingRoom/roomList','/livingRoom/roomListByType','/livingRoom/roomDetail','/users/addUser']
 }))
 
 //路由相关
