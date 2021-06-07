@@ -4,7 +4,7 @@
  * @github: https://github.com/lyff1006
  * @lastEditors: 小羽
  * @Date: 2020-08-31 22:27:40
- * @LastEditTime: 2020-09-05 17:58:10
+ * @LastEditTime: 2020-09-17 00:08:13
  * @Copyright: 1.0.0
  */
 var express = require('express');
@@ -73,6 +73,29 @@ router.post("/addRoom",async (req,res,next)=>{
     let result = await sqlHandle.DB2(sql)
     if (result.affectedRows == 1) {
         res.send(commonJS.outPut(200, data, 'success'))
+    }else{
+        res.send(commonJS.outPut(500, result, 'fail'))
+    }
+})
+
+
+/**
+ * @description: 获取直播间详情
+ * @Date: 2020-09-10 22:04:29
+ * @author: 小羽
+ * @param {type} 
+ * @return {type} 
+ */
+router.get("/roomDetail",async (req,res,next)=>{
+    let data = req.query
+    let sql = `select living_room.title,living_room.type,user.name,user.id,user.avatar from living_room left join user on living_room.user_id = user.id  where living_room.id = '${data.id}' and living_room.status != 0`
+    let result = await sqlHandle.DB2(sql)
+    if(result.length==1){
+        let resultData = {
+            ...result[0],
+            room_id: data.id
+        }
+        res.send(commonJS.outPut(200, resultData, 'success'))
     }else{
         res.send(commonJS.outPut(500, result, 'fail'))
     }
