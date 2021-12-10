@@ -5,8 +5,8 @@ const mysqlConf = {
     db1:{
         host: '127.0.0.1',
         user: 'root',
-        password: 'test',
-        database: 'test',
+        password: '123456',
+        database: 'living',
         port: 3306
     },
     db2:{
